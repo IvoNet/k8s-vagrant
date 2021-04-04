@@ -1,8 +1,9 @@
 #!/bin/bash
 echo "This script is written to work with Ubuntu 18.04"
 sudo swapoff -a
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y docker.io \
+echo "Installing dependencies. This may take a while..."
+sudo apt-get update && sudo apt-get upgrade -y -q
+sudo apt-get install -q -y docker.io \
    python3 \
    docker-compose \
    apache2-utils
@@ -35,6 +36,6 @@ kubectl get node
 
 echo
 echo "Script finished."
-echo "NOTE: Remember the 'kubectl join' command from the logging above!"
+echo "NOTE: Remember the 'kubeadm join' command from the logging above!"
 
 

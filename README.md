@@ -24,8 +24,12 @@ cd <project_dir>
 vagrant up
 ```
 
-Don't forget to join the workers with the `kubectl join` command as provided 
-during the creation of the cluster
+Now be patient... the standard setup (1 master, 2 workers) can easily take 
+up to 30 minutes (or longer) to complete depending on you internet 
+connection and the speed of your machine
+
+Don't forget to join the workers with the `kubeadm join` command as provided 
+during the creation of the cluster.
 
 ### Master login
 

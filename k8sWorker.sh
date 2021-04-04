@@ -1,7 +1,8 @@
 #!/bin/bash
 sudo swapoff -a
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y docker.io
+echo "Installing dependencies. This may take a while..."
+sudo apt-get update && sudo apt-get upgrade -q -y
+sudo apt-get install -q -y docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
 
@@ -15,4 +16,4 @@ sudo sed -i "s/KUBELET_CONFIG_ARGS=/KUBELET_CONFIG_ARGS=--node-ip=$(ifconfig|gre
 sudo cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
 echo "Finished."
-echo "NOTE:Now apply the 'kubectl join' command from the master install."
+echo "NOTE:Now apply the 'kubeadm join' command from the master install."
