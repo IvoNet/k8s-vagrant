@@ -35,6 +35,21 @@ connection and the speed of your machine
 Don't forget to join the workers with the `kubeadm join` command as provided 
 during the creation of the cluster.
 
+it will look something like this:
+
+```shell 
+kubeadm join 192.168.10.100:6443 --token wdgnhf.pic45fqtzxfhvbpb \
+    master:     --discovery-token-ca-cert-hash sha256:d30a96cab1bf1fc8dc90241f23fba6955a1dc00f15c95012f1ddc75088b8266b    
+```
+now remove the "master:" tekst and login to all your workers and perform the joim command
+
+```shell
+#EXAMPLE! Look in your creation loggin (on screen) 
+sudo kubeadm join 192.168.10.100:6443 --token wdgnhf.pic45fqtzxfhvbpb \
+    --discovery-token-ca-cert-hash sha256:d30a96cab1bf1fc8dc90241f23fba6955a1dc00f15c95012f1ddc75088b8266b    
+```
+
+
 ### Master login
 
 ```shell
