@@ -1,6 +1,10 @@
 # Kubernetes 
 
-A vagrant installation for kubernetes on VirtualBox
+A vagrant installation for kubernetes on VirtualBox.
+
+Note:
+- This setup is NOT meant for a prod env.
+- Just meant for practice and stuff you know :-)
 
 ## Prerequisites
 
@@ -75,3 +79,12 @@ vagrant destroy [-f]
 ## Creating images fail because already exist
 
 - Goto the Virtualbox VM folder and remove the existing image folder(s)
+
+## cgroupfs warning during installation
+
+```shell
+master: 	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+```
+
+- Just ignore
+

@@ -4,7 +4,8 @@ Vagrant.configure("2") do |config|
   # source: https://devops.stackexchange.com/questions/1237/how-do-i-configure-ssh-keys-in-a-vagrant-multi-machine-setup
   config.vm.box_check_update = false
   config.vm.box = "ubuntu/bionic64"
-  # config.vm.box = "ubuntu/focal64"  # ifconfig not installed standard so back to bionic
+  config.vm.synced_folder ".", "/vagrant", disabled: false
+  config.vm.provision "shell", path: "motd.sh", privileged: true
   config.vm.provision "file", source: "ssh", destination: "/home/vagrant/.ssh"
   config.vm.provision "file", source: "bin", destination: "/home/vagrant/bin"
   config.vm.provision :shell do |s|
@@ -40,7 +41,6 @@ Vagrant.configure("2") do |config|
   # Master Node
   config.vm.define "master", primary: true do |master|
     master.vm.network "private_network", ip: "192.168.10.100"
-    master.vm.synced_folder ".", "/vagrant", disabled: true
     master.vm.hostname = "master"
     master.vm.boot_timeout = 60
     master.vm.provider "virtualbox" do |vb|
@@ -53,6 +53,8 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
       vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
     end
+    master.vm.provision "shell", inline: "cp -r /vagrant/root_master/* /"
+    master.vm.provision "shell", path: "logo.sh", privileged: true
     master.vm.provision "shell", path: "k8sMaster.sh", privileged: false
   end
 
@@ -60,7 +62,6 @@ Vagrant.configure("2") do |config|
   1.upto(2) do |i|  # change the upto number to the amount of workers you need/want
     config.vm.define "worker#{i}" do |workers|
       workers.vm.network "private_network", ip: "192.168.10.11#{i}"
-      workers.vm.synced_folder ".", "/vagrant", disabled: true
       workers.vm.hostname = "worker#{i}"
       workers.vm.boot_timeout = 60
       workers.vm.provider "virtualbox" do |vb|
@@ -73,7 +74,8 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--ioapic", "on"]
         vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
       end
-      # Copy your own ssh config to your
+      workers.vm.provision "shell", inline: "cp -r /vagrant/root_worker/* /"
+      workers.vm.provision "shell", path: "logo.sh", privileged: true
       workers.vm.provision "shell", path: "k8sWorker.sh", privileged: false
     end
   end
