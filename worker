@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "Please provide a worker number:"
+    echo "e.g. worker 2"
+    exit 1
+fi
+
+chmod 600 ./ssh/* 2>/dev/null
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./ssh/id_rsa vagrant@192.168.10.11${1:-1}

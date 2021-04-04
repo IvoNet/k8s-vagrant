@@ -1,0 +1,9 @@
+# Added for ansible
+Host 192.168.10.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  IdentitiesOnly yes
+  User vagrant
+  IdentityFile ~/.ssh/id_rsa
+  PasswordAuthentication no
+
