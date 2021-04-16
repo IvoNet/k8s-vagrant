@@ -19,12 +19,14 @@ Descriptions below...
 
 It is always good to look at the scripts themselves :-)
 
+NOTE: All commands are assumed to be performed from the root of the project folder
+
+
 ### Create Cluster
 
 To create a simple k8s virtualbox cluster just clone this repo and:
 
 ```shell
-cd <project_dir>
 vagrant up
 ```
 
@@ -41,43 +43,39 @@ it will look something like this:
 kubeadm join 192.168.10.100:6443 --token wdgnhf.pic45fqtzxfhvbpb \
     master:     --discovery-token-ca-cert-hash sha256:d30a96cab1bf1fc8dc90241f23fba6955a1dc00f15c95012f1ddc75088b8266b    
 ```
-now remove the "master:" tekst and login to all your workers and perform the joim command
+now remove the `master:` tekst and login to all your workers and perform the join command
 
 ```shell
-#EXAMPLE! Look in your creation loggin (on screen) 
+#EXAMPLE! Look in your creation logging (on screen) 
 sudo kubeadm join 192.168.10.100:6443 --token wdgnhf.pic45fqtzxfhvbpb \
     --discovery-token-ca-cert-hash sha256:d30a96cab1bf1fc8dc90241f23fba6955a1dc00f15c95012f1ddc75088b8266b    
 ```
 
-
 ### Master login
 
 ```shell
-cd <project>
-master
+./master
 ```
 
 ### Worker login
 
 ```shell
 cd <project>
-worker <worker_number>
+./worker <worker_number>
 #e.g.
-worker 1
+./worker 1
 ```
 
 ### Cluster shutdown
 
 ```shell
-cd <project>
-down
+./down
 ```
 
 ### Cluster boot (start)
 
 ```shell
-cd <project>
-up
+./up
 ```
 
 ### Cluster remove 
@@ -85,7 +83,6 @@ up
 Note that all will be destroyed!
 
 ```shell
-cd <project>
 vagrant destroy [-f]
 ```
 
