@@ -5,7 +5,7 @@ for the vagrant machines.
 These keys a there just for demo purposes and should not be used
 on any system for realz like :-)
 
-They are used in this docker-box by default for this docker-box, but you can
+They are used in this docker-box by default for this VM, but you can
 overrule them before you provision it as instructed below.
 
 ## Create ssh public/private keys

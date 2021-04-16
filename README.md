@@ -51,6 +51,16 @@ sudo kubeadm join 192.168.10.100:6443 --token wdgnhf.pic45fqtzxfhvbpb \
     --discovery-token-ca-cert-hash sha256:d30a96cab1bf1fc8dc90241f23fba6955a1dc00f15c95012f1ddc75088b8266b    
 ```
 
+To scale the ammount of worker nodes u can change the following line in the `Vagrantfile`
+
+```ruby
+1.upto(2) do |i|  # change the upto number to the amount of workers you need/want
+```
+
+change the `2` to 1 for only one worker, conforming to the cluster used by the 
+[LFD259 kubernetes-for-developers by the Linux foundation](https://training.linuxfoundation.org/training/kubernetes-for-developers/)
+or to a higher number if you want more workers. Make sure you have enough memory on your host machine :-)
+
 ### Master login
 
 ```shell
