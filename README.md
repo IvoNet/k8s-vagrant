@@ -47,8 +47,8 @@ now remove the `master:` tekst and login to all your workers and perform the joi
 
 ```shell
 #EXAMPLE! Look in your creation logging (on screen) 
-sudo kubeadm join 192.168.10.100:6443 --token wdgnhf.pic45fqtzxfhvbpb \
-    --discovery-token-ca-cert-hash sha256:d30a96cab1bf1fc8dc90241f23fba6955a1dc00f15c95012f1ddc75088b8266b    
+sudo kubeadm join 192.168.10.100:6443 --token 4uxd8r.anef95ajy78bfy2n \
+        --discovery-token-ca-cert-hash sha256:6e1cd3fec426b2cbbc4264a982e00dbdd2ccd886f2a9287905fc2c2f628340de
 ```
 
 To scale the ammount of worker nodes u can change the following line in the `Vagrantfile`
