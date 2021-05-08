@@ -1,0 +1,17 @@
+#!/bin/sh
+cat <<EOT
+     _    ___        __  __           _
+    | | _( _ ) ___  |  \\/  | __ _ ___| |_ ___ _ __
+    | |/ / _ \\/ __| | |\\/| |/ _ / __| __/ _ \\ '__|
+    |   < (_) \\__ \ | |  | | (_| \\__ \\ ||  __/ |
+    |_|\\_\\___/|___/ |_|  |_|\\__,_|___/\\__\\___|_|
+
+  Created by Ivo Woltring:
+  * Blog    : https://www.ivonet.nl
+  * Website : https://www.ivowoltring.com
+  * Github  : https://github.com/ivonet
+  * Docker  : https://hub.docker.com/u/ivonet
+  * LinkedIn: https://www.linkedin.com/in/ivonet/
+  * Twitter : @ivonet
+
+EOT

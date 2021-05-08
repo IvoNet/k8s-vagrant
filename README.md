@@ -6,6 +6,16 @@ Note:
 - This setup is NOT meant for a prod env.
 - Just meant for practice and stuff you know :-)
 
+The default Vagrant file (in the root of the project) will create a fully configured 
+cluster of one master node and two worker nodes. 
+You only need to join the worker nodes once the installation is completed.
+
+## CKA 
+
+If you want a barebones setup to install your own cluster on (e.g. when going for the CKA certification)
+will find a vagrant file for that in the CKA folder.
+The Vagrantfile provided there is a stripped version the original.
+
 ## Prerequisites
 
 - [VirtualBox](https://www.virtualbox.org/) installed

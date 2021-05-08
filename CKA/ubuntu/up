@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+VBoxManage startvm "Master" --type headless
+VBoxManage startvm "worker1" --type headless
+#VBoxManage startvm "worker2" --type headless
+echo "The actual boot up time can take a while...."

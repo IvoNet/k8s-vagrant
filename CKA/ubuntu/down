@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+VBoxManage controlvm "Master" poweroff --type headless
+VBoxManage controlvm "worker1" poweroff --type headless
+VBoxManage controlvm "worker2" poweroff --type headless
