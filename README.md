@@ -22,6 +22,9 @@ network setup and names. Choose what you want to do or practice and choose one
 of the setups. You are of course free to change this. I would appreciate a pull
 request then :-).
 
+If you already had a cluster running and now want another one, just remove the
+first and start the other (see below)
+
 ## Prerequisites
 
 - [VirtualBox](https://www.virtualbox.org/) installed
@@ -51,30 +54,15 @@ Now be patient... the example setup (1 master, 1 worker) can easily take up to
 20 minutes (or longer) to complete depending on you internet connection and the
 speed of your machine
 
-Don't forget to join the workers with the `kubeadm join` command as provided
-during the creation of the cluster.
+The `kubectl join` command to connect the workers to the master node will now
+also be performed by the setup
 
-it will look something like this:
-
-```shell 
-kubeadm join 192.168.10.100:6443 --token wdgnhf.pic45fqtzxfhvbpb \
-    master:     --discovery-token-ca-cert-hash sha256:d30a96cab1bf1fc8dc90241f23fba6955a1dc00f15c95012f1ddc75088b8266b    
-```
-
-now remove the `master:` tekst and login to all your workers and perform the
-join command
-
-```shell
-#EXAMPLE! Look in your creation logging (on screen) 
-sudo kubeadm join 192.168.10.100:6443 --token 0ghrzs.evvi5r05dok5ongf \
-     --discovery-token-ca-cert-hash sha256:d8966c707eb359bce4acb779fbf5a8b941c0f6402c375e205cf5eb21da559c40
-```
-
-To scale the amount of worker nodes u can change the following line in
+To scale the amount of worker nodes you can change the following line in
 the `Vagrantfile`
 
 ```ruby
-1.upto(1) do |i|  # change the upto number to the amount of workers you need/want
+1.upto(1) do |i|
+  # change the upto number to the amount of workers you need/want
 ```
 
 The k8s-docker setup, conforms to the cluster used by the
