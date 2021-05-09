@@ -8,3 +8,4 @@ A simple k8s cluster based on cri-o to play and exercise with.
 - 1 master vm
 - 2 worker vm's - adjustable
 - calico as network plugin
+-

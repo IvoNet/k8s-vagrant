@@ -17,15 +17,12 @@ Vagrant.configure("2") do |config|
       echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
       echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
       echo "export PATH=~/bin:$PATH" >>/home/vagrant/.profile
-      # echo "alias k='kubectl'" >>/home/vagrant/.profile
-      # echo "alias h='history'" >>/home/vagrant/.profile
-      # echo "source <(kubectl completion bash)" >>/home/vagrant/.profile
-      # echo "complete -F __start_kubectl k" >>/home/vagrant/.profile
-      # echo "swapoff -a" >>/home/vagrant/.profile
+      echo "alias k='kubectl'" >>/home/vagrant/.profile
+      echo "alias h='history'" >>/home/vagrant/.profile
+      echo "source <(kubectl completion bash)" >>/home/vagrant/.profile
+      echo "complete -F __start_kubectl k" >>/home/vagrant/.profile
       chmod 600 /home/vagrant/.ssh/*
       chmod +x /home/vagrant/bin/* 
-      echo '192.168.10.100 master master' >>/etc/hosts
-      echo '#IP registry registry' >>/etc/hosts
       echo "set et sts=2 sw=2 ts=2" >/home/vagrant/.vimrc
     SHELL
   end

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 sudo sh -c "echo '192.168.10.100 master master' >>/etc/hosts"
 
-sudo apt update
-sudo apt -y upgrade
-sudo apt-get -y install net-tools vim
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y install net-tools vim git curl wget
 
 # Disable Swap
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
@@ -48,6 +48,6 @@ sudo systemctl enable crio
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-sudo apt update
-sudo apt-get -y install vim git curl wget kubelet kubeadm kubectl
+sudo apt-get update
+sudo apt-get install -q -y kubeadm=1.21.0-00 kubelet=1.21.0-00 kubectl=1.21.0-00
 sudo apt-mark hold kubelet kubeadm kubectl
