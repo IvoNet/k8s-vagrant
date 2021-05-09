@@ -17,4 +17,3 @@ sudo sed -i "s/KUBELET_CONFIG_ARGS=/KUBELET_CONFIG_ARGS=--node-ip=$(ifconfig|gre
 sudo cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
 echo "Finished."
-echo "NOTE:Now apply the 'kubeadm join' command from the master install."

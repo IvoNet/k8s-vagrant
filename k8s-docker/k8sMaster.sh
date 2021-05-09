@@ -20,7 +20,12 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo kubeadm init --kubernetes-version 1.20.1 \
      --apiserver-advertise-address=192.168.10.100 \
      --ignore-preflight-errors=IsDockerSystemdCheck \
-     --pod-network-cidr=192.168.0.0/16 | tee /home/vagrant/kubeadm-init.log
+     --pod-network-cidr=192.168.0.0/16 | tee kubeadm-init.log
+
+## Create the join command in the project folder as join.sh
+echo "See 'join.sh' for the join command"
+grep -A 1 -E "^kubeadm join"  kubeadm-init.log |tr -d '\\\n'|tr -d "\t"|sed 's/kubeadm/sudo kubeadm/'>/vagrant/k8s-docker/join.sh
+
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
