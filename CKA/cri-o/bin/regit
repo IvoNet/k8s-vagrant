@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+registryip=$(kubectl get svc registry|awk '/registry/{print $3}' 2>/dev/null)
+if [ -z "${registryip}" ]; then
+  if [ -z "$1" ]; then
+      echo "Have you run the regit on master first?"
+      echo "Please provide the IP address of the registry"
+      exit 1
+  else
+    registryip="$1"
+  fi
+fi
+
+sudo sed -i "s/.* registry registry/$registryip registry registry/g" /etc/hosts
+echo '{ "insecure-registries":["registry:5000"] }'
+cat /etc/hosts
+
+echo "Execute the following command on the worker nodes:"
+echo "regit ${registryip}"

@@ -4,8 +4,8 @@ Vagrant.configure("2") do |config|
   # source: https://devops.stackexchange.com/questions/1237/how-do-i-configure-ssh-keys-in-a-vagrant-multi-machine-setup
   config.vm.box_check_update = true
   # config.vm.box = "ubuntu/bionic64" # 18.04 LTS
-  # config.vm.box = "ubuntu/focal64" # 20.04 LTS
-  config.vm.box = "ubuntu/hirsute64" # 21.04
+  config.vm.box = "ubuntu/focal64" # 20.04 LTS
+  # config.vm.box = "ubuntu/hirsute64" # 21.04
   config.vm.synced_folder ".", "/vagrant", disabled: false
   config.vm.provision "shell", path: "motd.sh", privileged: true
   config.vm.provision "file", source: "ssh", destination: "/home/vagrant/.ssh"
