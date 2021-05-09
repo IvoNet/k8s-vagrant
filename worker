@@ -7,4 +7,4 @@ if [ -z "$1" ]; then
 fi
 
 chmod 600 ./ssh/* 2>/dev/null
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./ssh/id_rsa vagrant@192.168.10.11${1:-1}
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./common/ssh/id_rsa vagrant@192.168.10.11${1:-1}

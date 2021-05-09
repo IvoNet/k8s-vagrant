@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-VBoxManage controlvm "Master" poweroff --type headless
-VBoxManage controlvm "worker1" poweroff --type headless
-VBoxManage controlvm "worker2" poweroff --type headless
+VBoxManage controlvm "Master" poweroff --type headless 2>/dev/null
+for i in {1..5}; do
+  VBoxManage controlvm "worker$i" poweroff --type headless 2>/dev/null
+done
+echo "Machines are down..."
