@@ -1,13 +1,9 @@
-# Bare bones 
+# k8s-cri-o
 
-Two ubuntu images
+A simple k8s cluster based on cri-o to play and exercise with.
 
-- master
-- worker
+# Specs
 
-
-
-## Disclaimer
-
-- Note that thes setup will not run next to the original Vagrant setup from the root of the project It used the same IP addresses and hostnames.
-- Sorry about the duplication. I wanted to be up and running fast and just copied and adjusted where needed to suit my needs.
+- Ubuntu focal (20.04 LTS) - can be changed
+- 1 master vm
+- 2 worker vm's - adjustable

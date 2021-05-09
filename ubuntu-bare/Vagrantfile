@@ -6,17 +6,18 @@ Vagrant.configure("2") do |config|
   # config.vm.box = "ubuntu/bionic64" # 18.04 LTS
   config.vm.box = "ubuntu/focal64" # 20.04 LTS
   # config.vm.box = "ubuntu/hirsute64" # 21.04
-  config.vm.synced_folder ".", "/vagrant", disabled: false
-  config.vm.provision "shell", path: "motd.sh", privileged: true
-  config.vm.provision "file", source: "ssh", destination: "/home/vagrant/.ssh"
-  config.vm.provision "file", source: "bin", destination: "/home/vagrant/bin"
+  config.vm.synced_folder "..", "/vagrant", disabled: false
+  config.vm.provision "shell", path: "../common/motd.sh", privileged: true
+  config.vm.provision "file", source: "../common/ssh", destination: "/home/vagrant/.ssh"
+  config.vm.provision "file", source: "../common/bin", destination: "/home/vagrant/bin"
   config.vm.provision :shell do |s|
-    ssh_pub_key = File.readlines("./ssh/id_rsa.pub").first.strip
+    ssh_pub_key = File.readlines("../common/ssh/id_rsa.pub").first.strip
     s.inline = <<-SHELL
       mkdir -p /root/.ssh
       echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
       echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
       echo "export PATH=~/bin:$PATH" >>/home/vagrant/.profile
+      echo "alias h='history'" >>/home/vagrant/.profile
       chmod 600 /home/vagrant/.ssh/*
       chmod +x /home/vagrant/bin/* 
       echo "set et sts=2 sw=2 ts=2" >/home/vagrant/.vimrc
@@ -38,8 +39,8 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
       vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
     end
-    master.vm.provision "shell", inline: "cp -r /vagrant/root_master/* /"
-    master.vm.provision "shell", path: "logo.sh", privileged: true
+    master.vm.provision "shell", inline: "cp -r /vagrant/common/root_master/* /"
+    master.vm.provision "shell", path: "../common/logo.sh", privileged: true
   end
 
   # Worker node(s)
@@ -58,8 +59,8 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--ioapic", "on"]
         vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
       end
-      workers.vm.provision "shell", inline: "cp -r /vagrant/root_worker/* /"
-      workers.vm.provision "shell", path: "logo.sh", privileged: true
+      workers.vm.provision "shell", inline: "cp -r /vagrant/common/root_worker/* /"
+      workers.vm.provision "shell", path: "../common/logo.sh", privileged: true
     end
   end
 end

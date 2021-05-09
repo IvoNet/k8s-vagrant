@@ -1,13 +1,13 @@
-# Bare bones 
+# Ubuntu Bare
 
-Two ubuntu images
+A Base setup for creating your own k8s cluster.
 
-- master
-- worker
+I created this setup to train myself in installing different configurations of 
+k8s clusters by myself.
 
+## Specs:
 
+- Ubuntu focal (20.04 LTS) - Can be changed
+- 1 master vm
+- 1 worker vm - adjustable
 
-## Disclaimer
-
-- Note that thes setup will not run next to the original Vagrant setup from the root of the project It used the same IP addresses and hostnames.
-- Sorry about the duplication. I wanted to be up and running fast and just copied and adjusted where needed to suit my needs.

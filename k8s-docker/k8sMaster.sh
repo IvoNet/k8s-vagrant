@@ -20,7 +20,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo kubeadm init --kubernetes-version 1.20.1 \
      --apiserver-advertise-address=192.168.10.100 \
      --ignore-preflight-errors=IsDockerSystemdCheck \
-     --pod-network-cidr=192.168.0.0/16
+     --pod-network-cidr=192.168.0.0/16 | tee /home/vagrant/kubeadm-init.log
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -36,5 +36,6 @@ kubectl get node
 echo
 echo "Script finished."
 echo "NOTE: Remember the 'kubeadm join' command from the logging above!"
+echo "      It can also be found in the kubeadm-init.log in the home directory"
 
 
