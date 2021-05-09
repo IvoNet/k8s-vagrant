@@ -26,7 +26,6 @@ sudo kubeadm init --kubernetes-version 1.20.1 \
 echo "See 'join.sh' for the join command"
 grep -A 1 -E "^kubeadm join"  kubeadm-init.log |tr -d '\\\n'|tr -d "\t"|sed 's/kubeadm/sudo kubeadm/'>/vagrant/k8s-docker/join.sh
 
-
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -36,11 +35,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 sudo sed -i "s/KUBELET_CONFIG_ARGS=/KUBELET_CONFIG_ARGS=--node-ip=$(ifconfig|grep 'inet 192.168.10.1'|awk '{print $2}'|xargs echo -n) /g" /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 sudo cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
-kubectl get node
+kubectl get nodes
 
-echo
 echo "Script finished."
-echo "NOTE: Remember the 'kubeadm join' command from the logging above!"
-echo "      It can also be found in the kubeadm-init.log in the home directory"
 
 

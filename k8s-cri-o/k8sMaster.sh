@@ -84,6 +84,10 @@ sudo kubeadm config images pull
 ## Init the k8s cluster
 sudo sh -c "kubeadm init --config=kubeadm-config.yaml --upload-certs | tee kubeadm-init.log"
 
+## Correct the pod-ip address as it will otherwise point to the other network
+# https://stackoverflow.com/questions/51154911/kubectl-exec-results-in-error-unable-to-upgrade-connection-pod-does-not-exi
+sudo sed -i "s/KUBELET_CONFIG_ARGS=/KUBELET_CONFIG_ARGS=--node-ip=$(ifconfig|grep 'inet 192.168.10.1'|awk '{print $2}'|xargs echo -n) /g" /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
 ## Create the join command in the project folder as join.sh
 echo "See 'join.sh' for the join command"
 grep -A 1 -E "^kubeadm join"  kubeadm-init.log |tr -d '\\\n'|tr -d "\t"|sed 's/kubeadm/sudo kubeadm/'>/vagrant/k8s-cri-o/join.sh
