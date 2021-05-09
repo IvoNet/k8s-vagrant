@@ -105,6 +105,8 @@ cd <project>
 Note that all will be destroyed!
 
 ```shell
+# cd <cluster_name> e.g.:
+cd k8s-docker
 vagrant destroy [-f]
 ```
 
