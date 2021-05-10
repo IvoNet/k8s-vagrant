@@ -3,7 +3,7 @@ sudo sh -c "echo '192.168.10.100 master master' >>/etc/hosts"
 
 sudo apt-get update
 sudo apt-get -y upgrade
-sudo apt-get -y install net-tools vim git curl wget
+sudo apt-get -y install net-tools vim git curl wget trace tcpdump
 
 # Disable Swap
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab

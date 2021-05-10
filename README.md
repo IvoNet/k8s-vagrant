@@ -124,3 +124,25 @@ master: 	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgrou
 
 - Just ignore
 
+
+## forgot the join token
+
+- ssh into your master node
+- `ifconfig|grep 'inet 192.168.10.1'|awk '{print $2}'|xargs echo -n` to retrieve your master node ip
+- `kubeadm token list -o jsonpath='{.token}'` to retrieve the token
+- now sha256 it
+
+```shell
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt \
+ | openssl rsa -pubin -outform der 2>/dev/null \
+ | openssl dgst -sha256 -hex \
+ | sed 's/ˆ.* //'
+```
+
+- lets combine the above commands to recreate the complete join command...
+
+```shell
+echo "sudo kubeadm join $(ifconfig|grep 'inet 192.168.10.1'|awk '{print $2}'|xargs echo -n):6443 --token $(kubeadm token list -o jsonpath='{.token}') --discovery-token-ca-cert-hash $(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/ˆ.* //'|awk '{print $2}')"
+```
+
+- now copy the resulting command en perform it on your worker node(s)

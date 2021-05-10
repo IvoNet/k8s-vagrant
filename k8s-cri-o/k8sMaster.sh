@@ -5,7 +5,7 @@ sudo sh -c "echo '192.168.10.100 master master' >>/etc/hosts"
 sudo apt-get update
 sudo apt-get -y upgrade
 
-sudo apt-get -y install curl apt-transport-https net-tools vim git curl wget
+sudo apt-get -y install curl apt-transport-https net-tools vim git curl wget trace
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -75,6 +75,7 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 kubernetesVersion: 1.21.0
 controlPlaneEndpoint: "master:6443"
+cgroupDriver: systemd
 networking:
   podSubnet: 192.168.0.0/16
 EOF
