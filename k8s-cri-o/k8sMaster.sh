@@ -5,7 +5,7 @@ sudo sh -c "echo '192.168.10.100 master master' >>/etc/hosts"
 sudo apt-get update
 sudo apt-get -y upgrade
 
-sudo apt-get -y install curl apt-transport-https net-tools vim git curl wget trace
+sudo apt-get -y install curl apt-transport-https net-tools vim git curl wget trace etcd-client
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list

@@ -25,6 +25,11 @@ request then :-).
 If you already had a cluster running and now want another one, just remove the
 first and start the other (see below)
 
+All scripts have been made with a Mac in mind, but will probably work just fine
+on a linux based computer, and easily adjusted to work with windows. The
+assumption here is that if you work with k8s you will probably know something of
+computers 😄.
+
 ## Prerequisites
 
 - [VirtualBox](https://www.virtualbox.org/) installed
@@ -94,11 +99,15 @@ cd <project>
 ./down
 ```
 
+Note that this script takes a max of 5 worker nodes into account.
+
 ### Cluster boot (start)
 
 ```shell
 ./up
 ```
+
+Note that this script takes a max of 5 worker nodes into account.
 
 ### Cluster remove
 
@@ -124,11 +133,11 @@ master: 	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgrou
 
 - Just ignore
 
-
 ## forgot the join token
 
 - ssh into your master node
-- `ifconfig|grep 'inet 192.168.10.1'|awk '{print $2}'|xargs echo -n` to retrieve your master node ip
+- `ifconfig|grep 'inet 192.168.10.1'|awk '{print $2}'|xargs echo -n` to retrieve
+  your master node ip
 - `kubeadm token list -o jsonpath='{.token}'` to retrieve the token
 - now sha256 it
 
