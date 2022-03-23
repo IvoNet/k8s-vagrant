@@ -36,12 +36,12 @@ Vagrant.configure("2") do |config|
     master.vm.hostname = "master"
     master.vm.boot_timeout = 90
     master.vm.provider "parallels" do |prl|
-          prl.update_guest_tools = true
-          prl.check_guest_tools = true
-          prl.linked_clone = true
-          prl.memory = "4096"
-          prl.name = "Master"
-          prl.cpus = 2
+        prl.update_guest_tools = true
+        prl.check_guest_tools = true
+        prl.linked_clone = true
+        prl.memory = "4096"
+        prl.name = "Master"
+        prl.cpus = 2
     end
     master.vm.provision "shell", inline: "cp -r /vagrant/common/root_master/* /"
     master.vm.provision "shell", path: "../common/logo.sh", privileged: true
@@ -49,18 +49,18 @@ Vagrant.configure("2") do |config|
   end
 
   # Worker node(s)
-  1.upto(2) do |i|  # change the upto number to the amount of workers you need/want
+  1.upto(1) do |i|  # change the upto number to the amount of workers you need/want
     config.vm.define "worker#{i}" do |workers|
       workers.vm.network "private_network", ip: "192.168.10.11#{i}"
       workers.vm.hostname = "worker#{i}"
       workers.vm.boot_timeout = 90
       workers.vm.provider "parallels" do |prl|
-              prl.update_guest_tools = true
-              prl.check_guest_tools = true
-              prl.linked_clone = true
-              prl.memory = "2048"
-              prl.name = "worker#{i}"
-              prl.cpus = 2
+        prl.update_guest_tools = true
+        prl.check_guest_tools = true
+        prl.linked_clone = true
+        prl.memory = "2048"
+        prl.name = "worker#{i}"
+        prl.cpus = 2
       end
       workers.vm.provision "shell", inline: "cp -r /vagrant/common/root_worker/* /"
       workers.vm.provision "shell", path: "../common/logo.sh", privileged: true
