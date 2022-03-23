@@ -24,7 +24,7 @@ sudo kubeadm init --kubernetes-version 1.20.1 \
 
 ## Create the join command in the project folder as join.sh
 echo "See 'join.sh' for the join command"
-grep -A 1 -E "^kubeadm join"  kubeadm-init.log |tr -d '\\\n'|tr -d "\t"|sed 's/kubeadm/sudo kubeadm/'>/vagrant/k8s-docker/join.sh
+grep -A 1 -E "^kubeadm join"  kubeadm-init.log |tr -d '\\\n'|tr -d "\t"|sed 's/  */ /g'|sed 's/kubeadm/sudo kubeadm/'>/vagrant/k8s-docker/join.sh
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config

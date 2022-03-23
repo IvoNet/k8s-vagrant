@@ -34,6 +34,7 @@ computers 😄.
 
 - [VirtualBox](https://www.virtualbox.org/) installed
 - [Vagrant](https://www.vagrantup.com/docs/installation) installed
+- Parallels plugin installed for vagrant (`vagrant plugin install vagrant-parallels`)
 - enough space and memory
 
 ## Usage
@@ -52,7 +53,7 @@ To create a simple k8s virtualbox cluster just clone this repo and:
 ```shell
 # cd <cluster_name> e.g.:
 cd k8s-docker
-vagrant up
+vagrant up --no-parallel
 ```
 
 Now be patient... the example setup (1 master, 1 worker) can easily take up to
