@@ -11,3 +11,9 @@ k8s clusters by myself.
 - 1 master vm
 - 1 worker vm - adjustable
 
+
+## Build
+
+```shell
+vagrant up --no-parallel
+```

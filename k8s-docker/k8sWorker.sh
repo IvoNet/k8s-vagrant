@@ -9,7 +9,7 @@ sudo systemctl enable docker
 
 sudo sh -c "echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' >> /etc/apt/sources.list.d/kubernetes.list"
 sudo sh -c "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
-K8SVERSION=1.23.5
+K8SVERSION=1.20.1
 sudo apt-get update -q -y
 sudo apt-get install -q -y kubeadm=${K8SVERSION}-00 kubelet=${K8SVERSION}-00 kubectl=${K8SVERSION}-00
 sudo apt-mark hold kubelet kubeadm kubectl

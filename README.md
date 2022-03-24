@@ -1,6 +1,6 @@
 # Kubernetes
 
-A few vagrant installations for kubernetes on VirtualBox.
+A few vagrant installations for kubernetes on VirtualBox or Parallels.
 
 Note:
 
@@ -11,11 +11,11 @@ These clusters can be used to practice for the certification programs.
 
 The following cluster configurations are supported at this time:
 
-| Name | Description |
-| :---- | :-----------|
-| k8s-docker | A cluster on ubuntu 18.04 LTS with 1 master and 1 worker node (default) as needed by the [CKAD certification](https://training.linuxfoundation.org/training/kubernetes-for-developers/) course. It works with cgroups and docker as is used in the Linux Foundation course on k8s version 1.20.1 |
-| ubuntu-bare | A master and worker VM will be created but without k8s installed. To practice installing k8s yourself. |
-| k8s-cri-o | A k8s cluster with 1 master node and n worker nodes based on the systemd and cri-o in stead of docker |
+| Name | Description                                                                                                                                                                                     |
+| :---- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| k8s-docker | A cluster on ubuntu 18.04 LTS with 1 master and 1 worker node (default) as needed by the [CKAD certification](https://training.linuxfoundation.org/training/kubernetes-for-developers/) course. |
+| ubuntu-bare | A master and worker VM will be created but without k8s installed. To practice installing k8s yourself.                                                                                          |
+| k8s-cri-o | A k8s cluster with 1 master node and n worker nodes based on the systemd and cri-o in stead of docker                                                                                           |
 
 Note that these clusters will not work next to each other as they use the same
 network setup and names. Choose what you want to do or practice and choose one
@@ -49,6 +49,8 @@ folder
 ### Create Cluster
 
 To create a simple k8s virtualbox cluster just clone this repo and:
+
+- First make sure that `config.vm.box = ` in the Vagrantfile points to a box for your chipset.
 
 ```shell
 # cd <cluster_name> e.g.:

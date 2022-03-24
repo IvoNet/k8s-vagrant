@@ -3,7 +3,8 @@ Vagrant.configure("2") do |config|
   # Global stuff for all nodes...
   # source: https://devops.stackexchange.com/questions/1237/how-do-i-configure-ssh-keys-in-a-vagrant-multi-machine-setup
   config.vm.box_check_update = false
-  config.vm.box = "mpasternak/focal64-arm"  # Ubuntu 20.04 LTS
+  config.vm.box = "mpasternak/focal64-arm"  # Ubuntu 20.04 LTS (Apple M1 chipset)
+#   config.vm.box = "ubuntu/bionic64"  # Ubuntu 18.04 LTS (x64)
   config.vm.synced_folder "..", "/vagrant", disabled: false
   config.vm.provision "shell", path: "../common/motd.sh", privileged: true
   config.vm.provision "file", source: "../common/ssh", destination: "/home/vagrant/.ssh"
@@ -43,10 +44,20 @@ Vagrant.configure("2") do |config|
     master.vm.network "private_network", ip: "192.168.10.100"
     master.vm.hostname = "master"
     master.vm.boot_timeout = 60
+    master.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.memory = "4096"
+      vb.name = "Master"
+      vb.cpus = 2
+      vb.customize ["modifyvm", :id, "--vram", "20"]
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
+    end
     master.vm.provider "parallels" do |prl|
       prl.update_guest_tools = true
       prl.check_guest_tools = true
-      prl.linked_clone = true
+      prl.linked_clone = false
       prl.memory = "4096"
       prl.name = "Master"
       prl.cpus = 2
@@ -62,10 +73,20 @@ Vagrant.configure("2") do |config|
       workers.vm.network "private_network", ip: "192.168.10.11#{i}"
       workers.vm.hostname = "worker#{i}"
       workers.vm.boot_timeout = 60
+      workers.vm.provider "virtualbox" do |vb|
+        vb.gui = false
+        vb.memory = "2048"
+        vb.name = "worker#{i}"
+        vb.cpus = 2
+        vb.customize ["modifyvm", :id, "--vram", "20"]
+        vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
+        vb.customize ["modifyvm", :id, "--ioapic", "on"]
+        vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
+      end
       workers.vm.provider "parallels" do |prl|
         prl.update_guest_tools = true
         prl.check_guest_tools = true
-        prl.linked_clone = true
+        prl.linked_clone = false
         prl.memory = "2048"
         prl.name = "worker#{i}"
         prl.cpus = 2

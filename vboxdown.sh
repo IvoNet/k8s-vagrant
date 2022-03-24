@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+echo "Shutting down the cluster..."
+echo "Shutting down the master node..."
+VBoxManage controlvm "Master" poweroff --type headless 2>/dev/null
+for i in {1..5}; do
+  VBoxManage controlvm "worker$i" poweroff --type headless 2>/dev/null
+  if [ $? -ne 0 ]; then
+    break
+  fi
+  echo "Shutting down worker node $i..."
+done
+echo "Machines are down..."
