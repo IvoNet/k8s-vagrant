@@ -14,10 +14,11 @@ sudo systemctl start docker
 sudo systemctl enable docker
 sudo sh -c "echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' >> /etc/apt/sources.list.d/kubernetes.list"
 sudo sh -c "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
+K8SVERSION=1.21.6
 sudo apt-get update -q -y
-sudo apt-get install -q -y kubeadm=1.20.1-00 kubelet=1.20.1-00 kubectl=1.20.1-00
+sudo apt-get install -q -y kubeadm=${K8SVERSION}-00 kubelet=${K8SVERSION}-00 kubectl=${K8SVERSION}-00
 sudo apt-mark hold kubelet kubeadm kubectl
-sudo kubeadm init --kubernetes-version 1.20.1 \
+sudo kubeadm init --kubernetes-version ${K8SVERSION} \
      --apiserver-advertise-address=192.168.10.100 \
      --ignore-preflight-errors=IsDockerSystemdCheck \
      --pod-network-cidr=192.168.0.0/16 | tee kubeadm-init.log
