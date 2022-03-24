@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "Shutting down the cluster..."
+echo "Shutting down k8s cluster on Parallels..."
 echo "Shutting down the master node..."
 prlctl stop "Master"
 for i in {1..5}; do

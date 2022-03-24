@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Starting k82 cluster..."
+echo "Starting k8s cluster on Parallels..."
 prlctl start "Master" 2>/dev/null
 for i in {1..5}; do
   prlctl start "worker$i" 2>/dev/null

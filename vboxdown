@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "Shutting down the cluster..."
+echo "Shutting down k8s cluster on Virtualbox..."
 echo "Shutting down the master node..."
 VBoxManage controlvm "Master" poweroff --type headless 2>/dev/null
 for i in {1..5}; do
