@@ -1,1 +1,0 @@
-sudo kubeadm join master:6443 --token 9ucps6.0paur8ypv6qk7fl1 --discovery-token-ca-cert-hash sha256:8b96d511625b13cbff7c6b5285c96db5679cda6863a9564e482dd47d92231cb8 

@@ -12,9 +12,11 @@ sudo curl -s -L https://github.com/kubernetes/kompose/releases/download/v1.1.0/k
 sudo chmod +x /usr/local/bin/kompose
 sudo systemctl start docker
 sudo systemctl enable docker
+
+# K8S
 sudo sh -c "echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' >> /etc/apt/sources.list.d/kubernetes.list"
 sudo sh -c "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -"
-K8SVERSION=1.21.6
+K8SVERSION=1.23.5
 sudo apt-get update -q -y
 sudo apt-get install -q -y kubeadm=${K8SVERSION}-00 kubelet=${K8SVERSION}-00 kubectl=${K8SVERSION}-00
 sudo apt-mark hold kubelet kubeadm kubectl
