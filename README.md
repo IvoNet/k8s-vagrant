@@ -17,18 +17,11 @@ The following cluster configurations are supported at this time:
 | ubuntu-bare | A master and worker VM will be created but without k8s installed. To practice installing k8s yourself.                                                                                          |
 | k8s-cri-o | A k8s cluster with 1 master node and n worker nodes based on the systemd and cri-o in stead of docker                                                                                           |
 
-Note that these clusters will not work next to each other as they use the same
-network setup and names. Choose what you want to do or practice and choose one
-of the setups. You are of course free to change this. I would appreciate a pull
-request then :-).
+Note that these clusters will not work next to each other as they use the same network setup and names. Choose what you want to do or practice and choose one of the setups. You are of course free to change this. I would appreciate a pull request then :-).
 
-If you already had a cluster running and now want another one, just remove the
-first and start the other (see below)
+If you already had a cluster running and now want another one, just remove the first and start the other (see below)
 
-All scripts have been made with a Mac in mind, but will probably work just fine
-on a linux based computer, and easily adjusted to work with windows. The
-assumption here is that if you work with k8s you will probably know something of
-computers 😄.
+All scripts have been made with a Mac in mind, but will probably work just fine on a linux based computer, and easily adjusted to work with windows. The assumption here is that if you work with k8s you will probably know something of computers 😄.
 
 ## Prerequisites
 
@@ -36,6 +29,7 @@ computers 😄.
 - [Vagrant](https://www.vagrantup.com/docs/installation) installed
 - Parallels plugin installed for vagrant (`vagrant plugin install vagrant-parallels`)
 - enough space and memory
+- run `mac-virtualbox-network.sh` because that fixes a virtualbox network thing on the mac
 
 ## Usage
 
@@ -55,30 +49,22 @@ To create a simple k8s virtualbox cluster just clone this repo and:
 ```shell
 # cd <cluster_name> e.g.:
 cd k8s-docker
-vagrant up --no-parallel
+#If you use virtualbox
+vagrant up --provider=virtualbox --no-parallel
+#or if you use Parallels
+vagrant up --provider=parallels --no-parallel
 ```
 
-Now be patient... the example setup (1 master, 1 worker) can easily take up to
-20 minutes (or longer) to complete depending on you internet connection and the
-speed of your machine
+Now be patient... the example setup (1 master, 1 worker) can easily take up to 20 minutes (or longer) to complete depending on you internet connection and the speed of your machine
 
-The `kubectl join` command to connect the workers to the master node will now
-also be performed by the setup
-
-To scale the amount of worker nodes you can change the following line in
-the `Vagrantfile`
+To scale the amount of worker nodes you can change the following line in the `Vagrantfile`
 
 ```ruby
 1.upto(1) do |i|
   # change the upto number to the amount of workers you need/want
 ```
 
-The k8s-docker setup, conforms to the cluster used by the
-[LFD259 kubernetes-for-developers by the Linux foundation](https://training.linuxfoundation.org/training/kubernetes-for-developers/)
-Change the `upto(1)` number to a higher number if you want more workers. Make
-sure you have enough memory on your host machine :-)
-Every worker will be assigned 2Gb of RAM. The Master node will be assigned 4Gb
-of RAM.
+The k8s-docker setup, conforms to the cluster used by the [LFD259 kubernetes-for-developers by the Linux foundation](https://training.linuxfoundation.org/training/kubernetes-for-developers/) as of 2021 Change the `upto(1)` number to a higher number if you want more workers. Make sure you have enough memory on your host machine :-). Every worker will be assigned 2Gb of RAM. The Master node will be assigned 4Gb of RAM.
 
 ### Master login
 

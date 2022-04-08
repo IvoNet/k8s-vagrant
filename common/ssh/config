@@ -4,6 +4,6 @@ Host 192.168.10.*
   UserKnownHostsFile /dev/null
   IdentitiesOnly yes
   User vagrant
-  IdentityFile FULL_PATH__TO_THIS_ID_RSA_FILE_HERE
+  IdentityFile ~/.ssh/id_rsa
   PasswordAuthentication no
 

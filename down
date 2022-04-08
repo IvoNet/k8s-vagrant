@@ -3,11 +3,11 @@
 
 if command -v prlctl &> /dev/null
 then
-  prldown
+  ./prldown
 fi
 
 if command -v VBoxManage &> /dev/null
 then
-  vboxdown
+  ./vboxdown
 fi
 

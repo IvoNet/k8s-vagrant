@@ -3,11 +3,11 @@
 
 if command -v prlctl &> /dev/null
 then
-  prlup
+  ./prlup
 fi
 
 if command -v VBoxManage &> /dev/null
 then
-  vboxup
+  ./vboxup
 fi
 
